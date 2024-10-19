@@ -1,0 +1,6 @@
+create or replace trigger change_case before insert or update 
+on Book_details for each row
+begin
+:new.Bookname:=upper(:new.BookName);
+end;
+/

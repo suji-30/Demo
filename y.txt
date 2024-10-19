@@ -1,0 +1,360 @@
+SQL> create table Employee_details(Eid varchar(5),Ename varchar(10),Designation varchar(15),Salary number(7));
+
+Table created.
+
+SQL>  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary);
+Enter value for eid: E101
+Enter value for ename: Suma
+Enter value for designation: Designer
+Enter value for salary: 20000
+old   1:  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary)
+new   1:  insert into Employee_details values('E101','Suma','Designer',20000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: E102
+Enter value for ename: Amit
+Enter value for designation: Programmer
+Enter value for salary: 25000
+old   1:  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary)
+new   1:  insert into Employee_details values('E102','Amit','Programmer',25000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: E103
+Enter value for ename: Payal
+Enter value for designation: Tester
+Enter value for salary: 35000
+old   1:  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary)
+new   1:  insert into Employee_details values('E103','Payal','Tester',35000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: E104
+Enter value for ename: Kiran
+Enter value for designation: Programmer
+Enter value for salary: 40000
+old   1:  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary)
+new   1:  insert into Employee_details values('E104','Kiran','Programmer',40000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: E105
+Enter value for ename: Meenal
+Enter value for designation: DBA
+Enter value for salary: 50000
+old   1:  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary)
+new   1:  insert into Employee_details values('E105','Meenal','DBA',50000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: E106
+Enter value for ename: Sheila
+Enter value for designation: Analyst
+Enter value for salary: 60000
+old   1:  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary)
+new   1:  insert into Employee_details values('E106','Sheila','Analyst',60000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: E107
+Enter value for ename: Swamy
+Enter value for designation: Programmer
+Enter value for salary: 45000
+old   1:  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary)
+new   1:  insert into Employee_details values('E107','Swamy','Programmer',45000)
+
+1 row created.
+
+SQL> /
+Enter value for eid: E108
+Enter value for ename: Sushma
+Enter value for designation: DBA
+Enter value for salary: 45000
+old   1:  insert into Employee_details values('&Eid','&Ename','&Designation',&Salary)
+new   1:  insert into Employee_details values('E108','Sushma','DBA',45000)
+
+1 row created.
+
+SQL> select * from Employee_details;
+
+EID   ENAME      DESIGNATION         SALARY                                     
+----- ---------- --------------- ----------                                     
+E101  Suma       Designer             20000                                     
+E102  Amit       Programmer           25000                                     
+E103  Payal      Tester               35000                                     
+E104  Kiran      Programmer           40000                                     
+E105  Meenal     DBA                  50000                                     
+E106  Sheila     Analyst              60000                                     
+E107  Swamy      Programmer           45000                                     
+E108  Sushma     DBA                  45000                                     
+
+8 rows selected.
+
+SQL> select * from employees where Designation='Programmer';
+select * from employees where Designation='Programmer'
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from Employees_details where Designation='Programmer';
+select * from Employees_details where Designation='Programmer'
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from Employee_details where Designation='Programmer';
+
+EID   ENAME      DESIGNATION         SALARY                                     
+----- ---------- --------------- ----------                                     
+E102  Amit       Programmer           25000                                     
+E104  Kiran      Programmer           40000                                     
+E107  Swamy      Programmer           45000                                     
+
+SQL> select upper(Ename) from Employee_details;
+
+UPPER(ENAM                                                                      
+----------                                                                      
+SUMA                                                                            
+AMIT                                                                            
+PAYAL                                                                           
+KIRAN                                                                           
+MEENAL                                                                          
+SHEILA                                                                          
+SWAMY                                                                           
+SUSHMA                                                                          
+
+8 rows selected.
+
+SQL> select * from Employee_details where Ename like '%ee';
+
+no rows selected
+
+SQL> select * from Employee_details where Ename like '%ee%';
+
+EID   ENAME      DESIGNATION         SALARY                                     
+----- ---------- --------------- ----------                                     
+E105  Meenal     DBA                  50000                                     
+
+SQL> select distinct Designation from Employee_details;
+
+DESIGNATION                                                                     
+---------------                                                                 
+Programmer                                                                      
+Analyst                                                                         
+Tester                                                                          
+DBA                                                                             
+Designer                                                                        
+
+SQL> select * from Employee_details order by Salary asc;
+
+EID   ENAME      DESIGNATION         SALARY                                     
+----- ---------- --------------- ----------                                     
+E101  Suma       Designer             20000                                     
+E102  Amit       Programmer           25000                                     
+E103  Payal      Tester               35000                                     
+E104  Kiran      Programmer           40000                                     
+E107  Swamy      Programmer           45000                                     
+E108  Sushma     DBA                  45000                                     
+E105  Meenal     DBA                  50000                                     
+E106  Sheila     Analyst              60000                                     
+
+8 rows selected.
+
+SQL> select designation from Employee_details order by Salary asc;
+
+DESIGNATION                                                                     
+---------------                                                                 
+Designer                                                                        
+Programmer                                                                      
+Tester                                                                          
+Programmer                                                                      
+Programmer                                                                      
+DBA                                                                             
+DBA                                                                             
+Analyst                                                                         
+
+8 rows selected.
+
+SQL> select * from Employee_details order by designation,Salary asc;
+
+EID   ENAME      DESIGNATION         SALARY                                     
+----- ---------- --------------- ----------                                     
+E106  Sheila     Analyst              60000                                     
+E108  Sushma     DBA                  45000                                     
+E105  Meenal     DBA                  50000                                     
+E101  Suma       Designer             20000                                     
+E102  Amit       Programmer           25000                                     
+E104  Kiran      Programmer           40000                                     
+E107  Swamy      Programmer           45000                                     
+E103  Payal      Tester               35000                                     
+
+8 rows selected.
+
+SQL> select * from Employee_details order by Salary asc group by Designation;
+select * from Employee_details order by Salary asc group by Designation
+                                                   *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select * from Employee_details order by Salary  group by Designation;
+select * from Employee_details order by Salary  group by Designation
+                                                *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select Designation,Salary from Employee_details order by Salary  group by Designation;
+select Designation,Salary from Employee_details order by Salary  group by Designation
+                                                                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select desination,salary from Employee_details order by Salary asc;
+select desination,salary from Employee_details order by Salary asc
+       *
+ERROR at line 1:
+ORA-00904: "DESINATION": invalid identifier 
+
+
+SQL> select designation,salary from Employee_details order by Salary asc;
+
+DESIGNATION         SALARY                                                      
+--------------- ----------                                                      
+Designer             20000                                                      
+Programmer           25000                                                      
+Tester               35000                                                      
+Programmer           40000                                                      
+Programmer           45000                                                      
+DBA                  45000                                                      
+DBA                  50000                                                      
+Analyst              60000                                                      
+
+8 rows selected.
+
+SQL> select * from Employee_details order by Salary asc;
+
+EID   ENAME      DESIGNATION         SALARY                                     
+----- ---------- --------------- ----------                                     
+E101  Suma       Designer             20000                                     
+E102  Amit       Programmer           25000                                     
+E103  Payal      Tester               35000                                     
+E104  Kiran      Programmer           40000                                     
+E107  Swamy      Programmer           45000                                     
+E108  Sushma     DBA                  45000                                     
+E105  Meenal     DBA                  50000                                     
+E106  Sheila     Analyst              60000                                     
+
+8 rows selected.
+
+SQL> select designation,Max(Salary) as MAXSalary from Employee_details groupby designation;
+select designation,Max(Salary) as MAXSalary from Employee_details groupby designation
+                                                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select designation,Max(Salary) as MAXSalary from Employee_details group by designation;
+
+DESIGNATION      MAXSALARY                                                      
+--------------- ----------                                                      
+Programmer           45000                                                      
+Analyst              60000                                                      
+Tester               35000                                                      
+DBA                  50000                                                      
+Designer             20000                                                      
+
+SQL> select designation,Count(Salary)  from Employee_details group by designation;
+
+DESIGNATION     COUNT(SALARY)                                                   
+--------------- -------------                                                   
+Programmer                  3                                                   
+Analyst                     1                                                   
+Tester                      1                                                   
+DBA                         2                                                   
+Designer                    1                                                   
+
+SQL> select designation,Count(Ename)  from Employee_details group by designation;
+
+DESIGNATION     COUNT(ENAME)                                                    
+--------------- ------------                                                    
+Programmer                 3                                                    
+Analyst                    1                                                    
+Tester                     1                                                    
+DBA                        2                                                    
+Designer                   1                                                    
+
+SQL> select Max(Salary) as MaxSalary from Employee_details where Designation ='DBA';
+
+ MAXSALARY                                                                      
+----------                                                                      
+     50000                                                                      
+
+SQL> update Employee_details set Salary=Salary+3000 where designation='Tester';
+
+1 row updated.
+
+SQL> select * from Employee_details;
+
+EID   ENAME      DESIGNATION         SALARY                                     
+----- ---------- --------------- ----------                                     
+E101  Suma       Designer             20000                                     
+E102  Amit       Programmer           25000                                     
+E103  Payal      Tester               38000                                     
+E104  Kiran      Programmer           40000                                     
+E105  Meenal     DBA                  50000                                     
+E106  Sheila     Analyst              60000                                     
+E107  Swamy      Programmer           45000                                     
+E108  Sushma     DBA                  45000                                     
+
+8 rows selected.
+
+SQL> select * from Suppliers;
+
+SUP_NO SUP_NAME   ITEM_SUPPLIED   ITEM_PRICE CITY                               
+------ ---------- --------------- ---------- ---------------                    
+s1     Suresh     keyboard               600 Hyderabad                          
+s2     Kiran      Processor             8000 Delhi                              
+s4     Ramesh     Processor             9000 Bangalore                          
+s5     Manish     Printer               6000 Mumbai                             
+s6     Srikanth   Processor             8500 Chennai                            
+
+SQL> select Sup_name from Suppliers where Item_supplied from Supplier where Sup_name='ramesh')minus select 'ramesh' from dual;
+select Sup_name from Suppliers where Item_supplied from Supplier where Sup_name='ramesh')minus select 'ramesh' from dual
+                                                   *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> select Sup_name from Suppliers where Item_supplied from Supplier where Sup_name='Ramesh')minus select 'Ramesh' from dual;
+select Sup_name from Suppliers where Item_supplied from Supplier where Sup_name='Ramesh')minus select 'Ramesh' from dual
+                                                   *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> select Sup_name from Suppliers where Item_supplied=(select Item_supplied from Supplier where Sup_name='Ramesh')minus select 'Ramesh' from dual;
+select Sup_name from Suppliers where Item_supplied=(select Item_supplied from Supplier where Sup_name='Ramesh')minus select 'Ramesh' from dual
+                                                                              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select Sup_name from Suppliers where Item_supplied=(select Item_supplied from Suppliers where Sup_name='Ramesh')minus select 'Ramesh' from dual;
+
+SUP_NAME                                                                        
+----------                                                                      
+Kiran                                                                           
+Srikanth                                                                        
+
+SQL> spool off

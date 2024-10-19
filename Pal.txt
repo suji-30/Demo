@@ -1,0 +1,10 @@
+set serveroutput on
+declare
+s varchar(30);
+r varchar(30);
+begin
+s:='&s';
+r:=palindrome(s);
+dbms_output.put_line(r);
+end;
+/

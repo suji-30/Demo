@@ -1,0 +1,9 @@
+set serveroutput on
+declare
+a number;
+begin
+a:=&a;
+squareval(a);
+dbms_output.put_line('The square value is'||a);
+end;
+/

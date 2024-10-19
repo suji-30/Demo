@@ -1,0 +1,274 @@
+SQL> create table student(rno char(8),sname varchar(20));
+
+Table created.
+
+SQL> desc student
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RNO                                                CHAR(8)
+ SNAME                                              VARCHAR2(20)
+
+SQL> insert into student values('&rno','&sname');
+Enter value for rno: 22sucg90
+Enter value for sname: ram
+old   1: insert into student values('&rno','&sname')
+new   1: insert into student values('22sucg90','ram')
+
+1 row created.
+
+SQL> /
+Enter value for rno: 22sucg10
+Enter value for sname: suji
+old   1: insert into student values('&rno','&sname')
+new   1: insert into student values('22sucg10','suji')
+
+1 row created.
+
+SQL> select * from student;
+
+RNO      SNAME                                                                  
+-------- --------------------                                                   
+22sucg90 ram                                                                    
+22sucg10 suji                                                                   
+
+SQL> alter table student add marks number(3);
+
+Table altered.
+
+SQL> select * from student;
+
+RNO      SNAME                     MARKS                                        
+-------- -------------------- ----------                                        
+22sucg90 ram                                                                    
+22sucg10 suji                                                                   
+
+SQL> update table student set marks='78';
+update table student set marks='78'
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> update student set marks='78';
+
+2 rows updated.
+
+SQL> select * from student;
+
+RNO      SNAME                     MARKS                                        
+-------- -------------------- ----------                                        
+22sucg90 ram                          78                                        
+22sucg10 suji                         78                                        
+
+SQL> update student set marks='90' where sname='suji';
+
+1 row updated.
+
+SQL> select * from student;
+
+RNO      SNAME                     MARKS                                        
+-------- -------------------- ----------                                        
+22sucg90 ram                          78                                        
+22sucg10 suji                         90                                        
+
+SQL> drop column marks;
+drop column marks
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> alter table student drop column marks;
+
+Table altered.
+
+SQL> desc student
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RNO                                                CHAR(8)
+ SNAME                                              VARCHAR2(20)
+
+SQL> alter table student modify sname varchar(30);
+
+Table altered.
+
+SQL> desc student
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RNO                                                CHAR(8)
+ SNAME                                              VARCHAR2(30)
+
+SQL> alter table student rename sname to ename;
+alter table student rename sname to ename
+                           *
+ERROR at line 1:
+ORA-14155: missing PARTITION or SUBPARTITION keyword 
+
+
+SQL> alter table student rename column sname to ename;
+
+Table altered.
+
+SQL> select * from student;
+
+RNO      ENAME                                                                  
+-------- ------------------------------                                         
+22sucg90 ram                                                                    
+22sucg10 suji                                                                   
+
+SQL> alter table student rename to employee;
+
+Table altered.
+
+SQL> select * from employee;
+
+RNO      ENAME                                                                  
+-------- ------------------------------                                         
+22sucg90 ram                                                                    
+22sucg10 suji                                                                   
+
+SQL> delete from employee;
+
+2 rows deleted.
+
+SQL> select * from employee;
+
+no rows selected
+
+SQL> drop table employee;
+
+Table dropped.
+
+SQL> create table employee(rno char(8) primary key,ename varchar(30));
+
+Table created.
+
+SQL> create table employee('&rno' ,'&ename');
+Enter value for rno: 22sucg01
+Enter value for ename: abrahim
+old   1: create table employee('&rno' ,'&ename')
+new   1: create table employee('22sucg01' ,'abrahim')
+create table employee('22sucg01' ,'abrahim')
+                      *
+ERROR at line 1:
+ORA-00904: : invalid identifier 
+
+
+SQL> insert table employee values('&rno',&ename');
+Enter value for rno: 22sucg01
+Enter value for ename: abrahim
+old   1: insert table employee values('&rno',&ename')
+new   1: insert table employee values('22sucg01',abrahim')
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert table employee values('&rno','&ename');
+Enter value for rno: 22sucg01
+Enter value for ename: abrahim
+old   1: insert table employee values('&rno','&ename')
+new   1: insert table employee values('22sucg01','abrahim')
+insert table employee values('22sucg01','abrahim')
+       *
+ERROR at line 1:
+ORA-00925: missing INTO keyword 
+
+
+SQL> insert into table employee values('&rno',&ename');
+Enter value for rno: 22sucg01
+Enter value for ename: abrahim
+old   1: insert into table employee values('&rno',&ename')
+new   1: insert into table employee values('22sucg01',abrahim')
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into table employee values('&rno',"&ename');
+Enter value for rno: 22sucg01
+Enter value for ename: abrahim
+old   1: insert into table employee values('&rno',"&ename')
+new   1: insert into table employee values('22sucg01',"abrahim')
+ERROR:
+ORA-01740: missing double quote in identifier 
+
+
+SQL> insert into table employee values('&rno','&ename');
+Enter value for rno: 22sucg01
+Enter value for ename: abrahim
+old   1: insert into table employee values('&rno','&ename')
+new   1: insert into table employee values('22sucg01','abrahim')
+insert into table employee values('22sucg01','abrahim')
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> insert into  employee values('&rno','&ename');
+Enter value for rno: 22sucg01
+Enter value for ename: abrahim
+old   1: insert into  employee values('&rno','&ename')
+new   1: insert into  employee values('22sucg01','abrahim')
+
+1 row created.
+
+SQL> /
+Enter value for rno: 22sucg02
+Enter value for ename: rama
+old   1: insert into  employee values('&rno','&ename')
+new   1: insert into  employee values('22sucg02','rama')
+
+1 row created.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RNO                                       NOT NULL CHAR(8)
+ ENAME                                              VARCHAR2(30)
+
+SQL> select * from employee;
+
+RNO      ENAME                                                                  
+-------- ------------------------------                                         
+22sucg01 abrahim                                                                
+22sucg02 rama                                                                   
+
+SQL> alter table employee truncate column ename;
+alter table employee truncate column ename
+                              *
+ERROR at line 1:
+ORA-14155: missing PARTITION or SUBPARTITION keyword 
+
+
+SQL> truncate table employee where sname='rama';
+truncate table employee where sname='rama'
+                        *
+ERROR at line 1:
+ORA-03291: Invalid truncate option - missing STORAGE keyword 
+
+
+SQL> truncate from employee where sname='rama';
+truncate from employee where sname='rama'
+              *
+ERROR at line 1:
+ORA-03290: Invalid truncate command - missing CLUSTER or TABLE keyword 
+
+
+SQL> truncate table ename;
+truncate table ename
+               *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> truncate table ename where ename='rama';
+truncate table ename where ename='rama'
+                     *
+ERROR at line 1:
+ORA-03291: Invalid truncate option - missing STORAGE keyword 
+
+
+SQL> truncate table employee;
+
+Table truncated.
+
+SQL> spool off

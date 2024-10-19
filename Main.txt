@@ -1,0 +1,8 @@
+set serveroutput on
+declare 
+n number;
+begin
+n:=&n;
+dbms_output.put_line('The result is'||fact(n));
+end;
+/

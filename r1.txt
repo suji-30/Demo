@@ -1,0 +1,14 @@
+set serveroutput on
+declare 
+n number;
+c number:=1;
+p number;
+begin
+n:=&n;
+while c<=5 loop
+p:=n*c;
+dbms_output.put_line(n||'*'||c||'='||p);
+c:=c+1;
+end loop;
+end;
+/

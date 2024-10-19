@@ -1,0 +1,7 @@
+create or replace package pkg is
+function add(x number,n number)return number;
+function sub(x number,n number)return number;
+procedure mul(x in number,y in number,z out number);
+procedure div(x in number,y in number,z out number);
+end pkg;
+/

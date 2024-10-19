@@ -1,0 +1,18 @@
+create or replace function palindrome(s string)return varchar is
+r varchar(30);
+v varchar(30);
+c varchar(30);
+begin
+v:=lower(s);
+for i in reverse 1..length(v)
+loop
+c:=substr(v,i,1);
+r:=r||c;
+end loop;
+if(v=r)then
+return('Palindrome');
+else
+return('Not Palindrome');
+end if;
+end;
+/

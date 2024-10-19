@@ -1,0 +1,28 @@
+set serveroutput on;
+declare
+x number;
+y number;
+z number;
+op char(1);
+begin
+x:=&x;
+y:=&y;
+op:='&op';
+if(op='+') then
+z:=pkg.add(x,y);
+dbms_output.put_line('the sum is '||z);
+else if(op='-') then
+z:=pkg.sub(x,y);
+dbms_output.put_line('the different is '||z);
+else if(op='*') then
+pkg.mul(x,y,z);
+dbms_output.put_line('the multiplication is '||z);
+else if(op='/') then
+pkg.div(x,y,z);
+dbms_output.put_line('the division is '||z);
+end if;
+end if;
+end if;
+end if;
+end;
+/

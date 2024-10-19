@@ -1,0 +1,9 @@
+DECLARE
+    item_to_delete NUMBER;
+BEGIN
+item_to_delete:=&item_to_delete;
+    DELETE FROM ITEM WHERE ItemNum = item_to_delete;
+    
+    DBMS_OUTPUT.PUT_LINE('Item number ' || item_to_delete || ' deleted successfully.');
+END;
+/

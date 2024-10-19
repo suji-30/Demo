@@ -1,0 +1,51 @@
+set serveroutput on
+declare
+v_month number;
+v_year number;
+v_days number;
+begin
+v_month:=&v_month;
+v_year:=&v_year;
+IF v_month < 1 OR v_month > 12 THEN
+ DBMS_OUTPUT.PUT_LINE('Invalid month. Please enter a 
+number between 1 and 12.');
+ ELSIF v_year < 0 OR LENGTH(TO_CHAR(v_year)) != 4 THEN
+ DBMS_OUTPUT.PUT_LINE('Invalid year format. Please 
+enter a four-digit year.');
+ ELSE
+ CASE v_month
+ WHEN 1 THEN
+ v_days := 31;
+ WHEN 3 THEN
+ v_days := 31;
+ WHEN 5 THEN
+ v_days := 31;
+ WHEN 7 THEN
+ v_days := 31;
+ WHEN 8 THEN
+ v_days := 31;
+ WHEN 10 THEN
+ v_days := 31;
+ WHEN 12 THEN
+ v_days := 31;
+ WHEN 4 THEN
+ v_days := 30;
+ WHEN 6 THEN
+ v_days := 30;
+ WHEN 9 THEN
+ v_days := 30;
+ WHEN 11 THEN
+ v_days := 30;
+ WHEN 2 THEN
+ IF (MOD(v_year, 4) = 0 AND MOD(v_year, 100) != 0) OR 
+(MOD(v_year, 400) = 0) THEN
+ v_days := 29;
+ ELSE
+ v_days := 28;
+ END IF;
+ END CASE;
+ DBMS_OUTPUT.PUT_LINE('Number of days in month ' || 
+v_month || ' of year ' || v_year || ': ' || v_days);
+ END IF;
+END;
+/

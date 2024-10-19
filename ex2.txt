@@ -1,0 +1,197 @@
+SQL> create table product_details(
+  2  pid number(3)primary key,
+  3  pname varchar(20),
+  4  price number(4));
+
+Table created.
+
+SQL> insert into product_details(&pid,'&pname',&number);
+Enter value for pid: 101
+Enter value for pname: pen
+Enter value for number: 50
+old   1: insert into product_details(&pid,'&pname',&number)
+new   1: insert into product_details(101,'pen',50)
+insert into product_details(101,'pen',50)
+                            *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into product_details values(&pid,'&pname',&number);
+Enter value for pid: 101
+Enter value for pname: pen
+Enter value for number: 50
+old   1: insert into product_details values(&pid,'&pname',&number)
+new   1: insert into product_details values(101,'pen',50)
+
+1 row created.
+
+SQL> /
+Enter value for pid: 102
+Enter value for pname: pencil
+Enter value for number: 10
+old   1: insert into product_details values(&pid,'&pname',&number)
+new   1: insert into product_details values(102,'pencil',10)
+
+1 row created.
+
+SQL> /
+Enter value for pid: 103
+Enter value for pname: scale
+Enter value for number: 5
+old   1: insert into product_details values(&pid,'&pname',&number)
+new   1: insert into product_details values(103,'scale',5)
+
+1 row created.
+
+SQL> /
+Enter value for pid: 104
+Enter value for pname: stencil
+Enter value for number: 20
+old   1: insert into product_details values(&pid,'&pname',&number)
+new   1: insert into product_details values(104,'stencil',20)
+
+1 row created.
+
+SQL> select * from product_details;
+
+       PID PNAME                     PRICE                                      
+---------- -------------------- ----------                                      
+       101 pen                          50                                      
+       102 pencil                       10                                      
+       103 scale                         5                                      
+       104 stencil                      20                                      
+
+SQL> create table order_details(billno number(3),pid number(3)qty number(3),foreigh key(pid)references product_details(pid));
+create table order_details(billno number(3),pid number(3)qty number(3),foreigh key(pid)references product_details(pid))
+                                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table order_details(billno number(3),pid number(3),qty number(3),foreigh key(pid)references product_details(pid));
+create table order_details(billno number(3),pid number(3),qty number(3),foreigh key(pid)references product_details(pid))
+                                                                                   *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table order_details(billno number(3),pid number(3),qty number(3),foreigh key(pid) references product_details(pid));
+create table order_details(billno number(3),pid number(3),qty number(3),foreigh key(pid) references product_details(pid))
+                                                                                   *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table order_details(
+  2  billno number(3),
+  3  pid number(3),
+  4  qty number(3),
+  5  foreign key(pid) references product_details(pid));
+
+Table created.
+
+SQL> select * from order_details;
+
+no rows selected
+
+SQL> desc order_details
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BILLNO                                             NUMBER(3)
+ PID                                                NUMBER(3)
+ QTY                                                NUMBER(3)
+
+SQL> insert into order_details(&bllno,&pid,&qty);
+Enter value for bllno: 3
+Enter value for pid: 6
+Enter value for qty: 6
+old   1: insert into order_details(&bllno,&pid,&qty)
+new   1: insert into order_details(3,6,6)
+insert into order_details(3,6,6)
+                          *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into order_details(&billno,&pid,&qty);
+Enter value for billno: 501
+Enter value for pid: 101
+Enter value for qty: 3
+old   1: insert into order_details(&billno,&pid,&qty)
+new   1: insert into order_details(501,101,3)
+insert into order_details(501,101,3)
+                          *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into order_details values(&billno,&pid,&qty);
+Enter value for billno: 101
+Enter value for pid: 501
+Enter value for qty: 4
+old   1: insert into order_details values(&billno,&pid,&qty)
+new   1: insert into order_details values(101,501,4)
+insert into order_details values(101,501,4)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C003996) violated - parent key not 
+found 
+
+
+SQL> insert into order_details values(&billno,&pid,&qty);
+Enter value for billno: 501
+Enter value for pid: 101
+Enter value for qty: 3
+old   1: insert into order_details values(&billno,&pid,&qty)
+new   1: insert into order_details values(501,101,3)
+
+1 row created.
+
+SQL> /
+Enter value for billno: 502
+Enter value for pid: 102
+Enter value for qty: 1
+old   1: insert into order_details values(&billno,&pid,&qty)
+new   1: insert into order_details values(502,102,1)
+
+1 row created.
+
+SQL> /
+Enter value for billno: 501
+Enter value for pid: 106
+Enter value for qty: 1
+old   1: insert into order_details values(&billno,&pid,&qty)
+new   1: insert into order_details values(501,106,1)
+insert into order_details values(501,106,1)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C003996) violated - parent key not 
+found 
+
+
+SQL> /
+Enter value for billno: 501
+Enter value for pid: 104
+Enter value for qty: 2
+old   1: insert into order_details values(&billno,&pid,&qty)
+new   1: insert into order_details values(501,104,2)
+
+1 row created.
+
+SQL> select * from order_details;
+
+    BILLNO        PID        QTY                                                
+---------- ---------- ----------                                                
+       501        101          3                                                
+       502        102          1                                                
+       501        104          2                                                
+
+SQL> alter table product_details drop column pid;
+alter table product_details drop column pid
+                                        *
+ERROR at line 1:
+ORA-12992: cannot drop parent key column 
+
+
+SQL> spool off

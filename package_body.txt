@@ -1,0 +1,23 @@
+create or replace package body pkg is
+function add(x number,y number)return number is
+z number;
+begin
+z:=x+y;
+return (z);
+end add;
+function sub(x number,y number)return number is
+z number;
+begin
+z:=x-y;
+return (z);
+end sub;
+procedure mul(x in number,y in number,z out number)is
+begin
+z:=x*y;
+end mul;
+procedure div(x in number,y in number,z out number)is
+begin
+z:=x/y;
+end div;
+end pkg;
+/

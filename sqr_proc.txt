@@ -1,0 +1,5 @@
+create or replace procedure squareval(x in out number)is
+begin
+x:=x*x;
+end;
+/

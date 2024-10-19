@@ -1,0 +1,290 @@
+SQL> select * from suppliers;
+
+SU SUP_NAME             ITEM_SUPPLIED                  ITEM_PRICE               
+-- -------------------- ------------------------------ ----------               
+CITY                                                                            
+--------------------                                                            
+s1 suresh               keyboard                              600               
+hyderabad                                                                       
+                                                                                
+s2 kiren                processor                            8000               
+delhi                                                                           
+                                                                                
+s3 mohan                mouse                                 350               
+delhi\                                                                          
+                                                                                
+
+SU SUP_NAME             ITEM_SUPPLIED                  ITEM_PRICE               
+-- -------------------- ------------------------------ ----------               
+CITY                                                                            
+--------------------                                                            
+s4 ramesh               processor                            9000               
+bangalore                                                                       
+                                                                                
+s5 manish               printer                              6000               
+mumbai                                                                          
+                                                                                
+s6 srikanth             processor                            8500               
+chennai                                                                         
+                                                                                
+
+6 rows selected.
+
+SQL> drop table suppliers;
+
+Table dropped.
+
+SQL> create table Suppliers(Sup_no varchar(6)primary key,Sup_name varchar(10),Item_supplied varchar(15),Item_price number(5),City varchar(15));
+
+Table created.
+
+SQL> insert into Suppliers values('&Sup_no','&Sup_name','&Item_supplied',&Item_price,'&City');
+Enter value for sup_no: s1
+Enter value for sup_name: Suresh
+Enter value for item_supplied: keyboard
+Enter value for item_price: 400
+Enter value for city: Hyderabad
+old   1: insert into Suppliers values('&Sup_no','&Sup_name','&Item_supplied',&Item_price,'&City')
+new   1: insert into Suppliers values('s1','Suresh','keyboard',400,'Hyderabad')
+
+1 row created.
+
+SQL> /
+Enter value for sup_no: s2
+Enter value for sup_name: Kiran
+Enter value for item_supplied: Processor
+Enter value for item_price: 8000
+Enter value for city: Delhi
+old   1: insert into Suppliers values('&Sup_no','&Sup_name','&Item_supplied',&Item_price,'&City')
+new   1: insert into Suppliers values('s2','Kiran','Processor',8000,'Delhi')
+
+1 row created.
+
+SQL> /
+Enter value for sup_no: s3
+Enter value for sup_name: Mohan
+Enter value for item_supplied: Mouse
+Enter value for item_price: 350
+Enter value for city: Delhi
+old   1: insert into Suppliers values('&Sup_no','&Sup_name','&Item_supplied',&Item_price,'&City')
+new   1: insert into Suppliers values('s3','Mohan','Mouse',350,'Delhi')
+
+1 row created.
+
+SQL> /
+Enter value for sup_no: s4
+Enter value for sup_name: Ramesh
+Enter value for item_supplied: Processor
+Enter value for item_price: 9000
+Enter value for city: Bangalore
+old   1: insert into Suppliers values('&Sup_no','&Sup_name','&Item_supplied',&Item_price,'&City')
+new   1: insert into Suppliers values('s4','Ramesh','Processor',9000,'Bangalore')
+
+1 row created.
+
+SQL> /
+Enter value for sup_no: s5
+Enter value for sup_name: Manish
+Enter value for item_supplied: Printer
+Enter value for item_price: 6000
+Enter value for city: Mumbai
+old   1: insert into Suppliers values('&Sup_no','&Sup_name','&Item_supplied',&Item_price,'&City')
+new   1: insert into Suppliers values('s5','Manish','Printer',6000,'Mumbai')
+
+1 row created.
+
+SQL> /
+Enter value for sup_no: s6
+Enter value for sup_name: Srikanth
+Enter value for item_supplied: Processor
+Enter value for item_price: 8500
+Enter value for city: Chennai
+old   1: insert into Suppliers values('&Sup_no','&Sup_name','&Item_supplied',&Item_price,'&City')
+new   1: insert into Suppliers values('s6','Srikanth','Processor',8500,'Chennai')
+
+1 row created.
+
+SQL> select * from suppliers;
+
+SUP_NO SUP_NAME   ITEM_SUPPLIED   ITEM_PRICE CITY                               
+------ ---------- --------------- ---------- ---------------                    
+s1     Suresh     keyboard               400 Hyderabad                          
+s2     Kiran      Processor             8000 Delhi                              
+s3     Mohan      Mouse                  350 Delhi                              
+s4     Ramesh     Processor             9000 Bangalore                          
+s5     Manish     Printer               6000 Mumbai                             
+s6     Srikanth   Processor             8500 Chennai                            
+
+6 rows selected.
+
+SQL> update suppliers set item_price=item_price+200 where item_supplied='keyboard';
+
+1 row updated.
+
+SQL> select * from suppliers;
+
+SUP_NO SUP_NAME   ITEM_SUPPLIED   ITEM_PRICE CITY                               
+------ ---------- --------------- ---------- ---------------                    
+s1     Suresh     keyboard               600 Hyderabad                          
+s2     Kiran      Processor             8000 Delhi                              
+s3     Mohan      Mouse                  350 Delhi                              
+s4     Ramesh     Processor             9000 Bangalore                          
+s5     Manish     Printer               6000 Mumbai                             
+s6     Srikanth   Processor             8500 Chennai                            
+
+6 rows selected.
+
+SQL> delete from Suppliers where Item_price=min(Item_supplied);
+delete from Suppliers where Item_price=min(Item_supplied)
+                                       *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> delete from Suppliers where Item_price=(select min(Item_price) from Suppliers);
+
+1 row deleted.
+
+SQL> select * from suppliers;
+
+SUP_NO SUP_NAME   ITEM_SUPPLIED   ITEM_PRICE CITY                               
+------ ---------- --------------- ---------- ---------------                    
+s1     Suresh     keyboard               600 Hyderabad                          
+s2     Kiran      Processor             8000 Delhi                              
+s4     Ramesh     Processor             9000 Bangalore                          
+s5     Manish     Printer               6000 Mumbai                             
+s6     Srikanth   Processor             8500 Chennai                            
+
+SQL> select * from Suppliers order by Item_supplied,Item_price desc;
+
+SUP_NO SUP_NAME   ITEM_SUPPLIED   ITEM_PRICE CITY                               
+------ ---------- --------------- ---------- ---------------                    
+s5     Manish     Printer               6000 Mumbai                             
+s4     Ramesh     Processor             9000 Bangalore                          
+s6     Srikanth   Processor             8500 Chennai                            
+s2     Kiran      Processor             8000 Delhi                              
+s1     Suresh     keyboard               600 Hyderabad                          
+
+SQL> select * from Suppliers order by Item_price desc;
+
+SUP_NO SUP_NAME   ITEM_SUPPLIED   ITEM_PRICE CITY                               
+------ ---------- --------------- ---------- ---------------                    
+s4     Ramesh     Processor             9000 Bangalore                          
+s6     Srikanth   Processor             8500 Chennai                            
+s2     Kiran      Processor             8000 Delhi                              
+s5     Manish     Printer               6000 Mumbai                             
+s1     Suresh     keyboard               600 Hyderabad                          
+
+SQL> select * from Suppliers where Item_Supplied NOT IN('Processor','Keyboard');
+
+SUP_NO SUP_NAME   ITEM_SUPPLIED   ITEM_PRICE CITY                               
+------ ---------- --------------- ---------- ---------------                    
+s1     Suresh     keyboard               600 Hyderabad                          
+s5     Manish     Printer               6000 Mumbai                             
+
+SQL> select * from Suppliers where Item_Supplied NOT IN('Processor','keyboard');
+
+SUP_NO SUP_NAME   ITEM_SUPPLIED   ITEM_PRICE CITY                               
+------ ---------- --------------- ---------- ---------------                    
+s5     Manish     Printer               6000 Mumbai                             
+
+SQL> create table Book_details(BookId varchar(6)primary key,BookName varchar(20),Author varchar(15),Publisher varchar(10),Price number(4));
+
+Table created.
+
+SQL> insert into Book_details values('&BookId','&BookName','&Author','&Publisher',&Price);
+Enter value for bookid: B101
+Enter value for bookname: Cost Accounting
+Enter value for author: Jain Narang
+Enter value for publisher: Kalyani
+Enter value for price: 800
+old   1: insert into Book_details values('&BookId','&BookName','&Author','&Publisher',&Price)
+new   1: insert into Book_details values('B101','Cost Accounting','Jain Narang','Kalyani',800)
+
+1 row created.
+
+SQL> /
+Enter value for bookid: B102
+Enter value for bookname: Business Statistics
+Enter value for author: OP Aggarwal
+Enter value for publisher: Himalaya
+Enter value for price: 750
+old   1: insert into Book_details values('&BookId','&BookName','&Author','&Publisher',&Price)
+new   1: insert into Book_details values('B102','Business Statistics','OP Aggarwal','Himalaya',750)
+
+1 row created.
+
+SQL> /
+Enter value for bookid: B103
+Enter value for bookname: Rdbms
+Enter value for author: C J Date
+Enter value for publisher: TMH
+Enter value for price: 900
+old   1: insert into Book_details values('&BookId','&BookName','&Author','&Publisher',&Price)
+new   1: insert into Book_details values('B103','Rdbms','C J Date','TMH',900)
+
+1 row created.
+
+SQL> /
+Enter value for bookid: B104
+Enter value for bookname: Mgmt Accounting
+Enter value for author: RK Sharma
+Enter value for publisher: Kalyani
+Enter value for price: 450
+old   1: insert into Book_details values('&BookId','&BookName','&Author','&Publisher',&Price)
+new   1: insert into Book_details values('B104','Mgmt Accounting','RK Sharma','Kalyani',450)
+
+1 row created.
+
+SQL> /
+Enter value for bookid: B105
+Enter value for bookname: Operating Systems
+Enter value for author: Galvin
+Enter value for publisher: PHI
+Enter value for price: 750
+old   1: insert into Book_details values('&BookId','&BookName','&Author','&Publisher',&Price)
+new   1: insert into Book_details values('B105','Operating Systems','Galvin','PHI',750)
+
+1 row created.
+
+SQL> /
+Enter value for bookid: B106
+Enter value for bookname: Advanced Accounting
+Enter value for author: SC Gupta
+Enter value for publisher: Himalaya
+Enter value for price: 600
+old   1: insert into Book_details values('&BookId','&BookName','&Author','&Publisher',&Price)
+new   1: insert into Book_details values('B106','Advanced Accounting','SC Gupta','Himalaya',600)
+
+1 row created.
+
+SQL> select * from Book_details;
+
+BOOKID BOOKNAME             AUTHOR          PUBLISHER       PRICE               
+------ -------------------- --------------- ---------- ----------               
+B101   Cost Accounting      Jain Narang     Kalyani           800               
+B102   Business Statistics  OP Aggarwal     Himalaya          750               
+B103   Rdbms                C J Date        TMH               900               
+B104   Mgmt Accounting      RK Sharma       Kalyani           450               
+B105   Operating Systems    Galvin          PHI               750               
+B106   Advanced Accounting  SC Gupta        Himalaya          600               
+
+6 rows selected.
+
+SQL> select Author from Book_details where Publisher='Himalaya';
+
+AUTHOR                                                                          
+---------------                                                                 
+OP Aggarwal                                                                     
+SC Gupta                                                                        
+
+SQL> select Publisher,SUM(Price) as TotalCost from Book_details group by Publisher;
+
+PUBLISHER   TOTALCOST                                                           
+---------- ----------                                                           
+PHI               750                                                           
+Kalyani          1250                                                           
+TMH               900                                                           
+Himalaya         1350                                                           
+
+SQL> 
